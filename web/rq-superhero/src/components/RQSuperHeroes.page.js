@@ -22,6 +22,9 @@ const fetchSuperHeroes = () => {
 
 // refetchOnWindowFocus is default true. true | false | 'always'
 
+// refetchInterval: continuous refetch at that interval (polling), by default it stops polling when window loses focus
+// refetchIntervalInBackground: poll data in background even when lose focus (switched tabs)
+
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
   const { isLoading, data, isError, error, isFetching } = useQuery('superheroes', fetchSuperHeroes, {
@@ -33,6 +36,9 @@ export const RQSuperHeroesPage = () => {
     refetchOnMount: true,
     // lose focus and gain focus, background refetch occurs 
     refetchOnWindowFocus: true,
+    // fetch every 2s
+    refetchInterval: 2000,
+    refetchIntervalInBackground: false
   })
 
   console.log({ isLoading, isFetching })
