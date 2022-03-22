@@ -16,11 +16,15 @@ const fetchSuperHeroes = () => {
 // background refetch will occur (isFetching flag)
 // update db.json and will see it refetches in the background and update this page, without seeing isLoading
 
+// default stale time is 0s
+
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
   const { isLoading, data, isError, error, isFetching } = useQuery('superheroes', fetchSuperHeroes, {
     // will be garbage collected after 5s
-    cacheTime: 5000
+    cacheTime: 5000,
+    // how long is it okay for user to see stale data. we'll see the "fresh" flag longer now, isFetching will be false
+    staleTime: 3000,
   })
 
   console.log({ isLoading, isFetching })
