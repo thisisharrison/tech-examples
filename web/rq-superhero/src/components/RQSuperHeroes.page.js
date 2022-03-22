@@ -29,8 +29,20 @@ const fetchSuperHeroes = () => {
 
 // refetch: function to manually trigger the query
 
+// perform side effect when query completes
+
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
+  const onSuccess = (data) => {
+    alert("some success side effect")
+    console.log('we get the ', data)
+  }
+
+  const onError = (error) => {
+    alert("some error side effect")
+    console.error('we get the ', error.message)
+  }
+
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery('superheroes', fetchSuperHeroes, {
     // will be garbage collected after 5s
     cacheTime: 5000,
@@ -44,7 +56,11 @@ export const RQSuperHeroesPage = () => {
     refetchInterval: 2000,
     refetchIntervalInBackground: false,
     // not to fire the get request on mount
-    enabled: false
+    enabled: false,
+    // callbacks and side effects for success and error 
+    onSuccess,
+    // will perform query 3 times before it calls onError
+    onError
   })
 
   console.log({ isLoading, isFetching })
