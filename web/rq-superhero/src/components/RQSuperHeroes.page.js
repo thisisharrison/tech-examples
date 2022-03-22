@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import { Api } from '../constants'
+import { useState } from 'react'
 
 const fetchSuperHeroes = () => {
   return axios.get(Api.good)
@@ -33,30 +34,34 @@ const fetchSuperHeroes = () => {
 
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
+  const [pollMs, setPollMs] = useState(2000)
+
   const onSuccess = (data) => {
-    alert("some success side effect")
+    // alert("some success side effect")
     console.log('we get the ', data)
+    if (data.data.length === 4) setPollMs(false)
   }
 
   const onError = (error) => {
-    alert("some error side effect")
+    // alert("some error side effect")
     console.error('we get the ', error.message)
+    if (error) setPollMs(false)
   }
 
   const { isLoading, data, isError, error, isFetching, refetch } = useQuery('superheroes', fetchSuperHeroes, {
-    // will be garbage collected after 5s
-    cacheTime: 5000,
-    // how long is it okay for user to see stale data. we'll see the "fresh" flag longer now, isFetching will be false
-    staleTime: 3000,
-    // refetch every time component mounts. set to false, only fetches the first time
-    refetchOnMount: true,
-    // lose focus and gain focus, background refetch occurs 
-    refetchOnWindowFocus: true,
+    // // will be garbage collected after 5s
+    // cacheTime: 5000,
+    // // how long is it okay for user to see stale data. we'll see the "fresh" flag longer now, isFetching will be false
+    // staleTime: 3000,
+    // // refetch every time component mounts. set to false, only fetches the first time
+    // refetchOnMount: true,
+    // // lose focus and gain focus, background refetch occurs 
+    // refetchOnWindowFocus: true,
     // fetch every 2s
-    refetchInterval: 2000,
+    refetchInterval: pollMs,
     refetchIntervalInBackground: false,
-    // not to fire the get request on mount
-    enabled: false,
+    // // not to fire the get request on mount
+    // enabled: false,
     // callbacks and side effects for success and error 
     onSuccess,
     // will perform query 3 times before it calls onError
@@ -77,7 +82,7 @@ export const RQSuperHeroesPage = () => {
     <>
       <h2>React Query Super Heroes Page</h2>
       {/* click to manually trigger the query */}
-      <button onClick={refetch}>Fetch heros</button>
+      {/* <button onClick={refetch}>Fetch heros</button> */}
       {data?.data.map(hero => {
         return <div key={hero.name}>{hero.name}</div>
       })}
