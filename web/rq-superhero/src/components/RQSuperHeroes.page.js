@@ -18,6 +18,10 @@ const fetchSuperHeroes = () => {
 
 // default stale time is 0s
 
+// refetchOnMount is default true. true | false | 'always'
+
+// refetchOnWindowFocus is default true. true | false | 'always'
+
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
   const { isLoading, data, isError, error, isFetching } = useQuery('superheroes', fetchSuperHeroes, {
@@ -25,6 +29,10 @@ export const RQSuperHeroesPage = () => {
     cacheTime: 5000,
     // how long is it okay for user to see stale data. we'll see the "fresh" flag longer now, isFetching will be false
     staleTime: 3000,
+    // refetch every time component mounts. set to false, only fetches the first time
+    refetchOnMount: true,
+    // lose focus and gain focus, background refetch occurs 
+    refetchOnWindowFocus: true,
   })
 
   console.log({ isLoading, isFetching })
