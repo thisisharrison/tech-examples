@@ -25,9 +25,13 @@ const fetchSuperHeroes = () => {
 // refetchInterval: continuous refetch at that interval (polling), by default it stops polling when window loses focus
 // refetchIntervalInBackground: poll data in background even when lose focus (switched tabs)
 
+// enabled: fire on mount, default true. used for user driven fetching
+
+// refetch: function to manually trigger the query
+
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
-  const { isLoading, data, isError, error, isFetching } = useQuery('superheroes', fetchSuperHeroes, {
+  const { isLoading, data, isError, error, isFetching, refetch } = useQuery('superheroes', fetchSuperHeroes, {
     // will be garbage collected after 5s
     cacheTime: 5000,
     // how long is it okay for user to see stale data. we'll see the "fresh" flag longer now, isFetching will be false
@@ -38,12 +42,14 @@ export const RQSuperHeroesPage = () => {
     refetchOnWindowFocus: true,
     // fetch every 2s
     refetchInterval: 2000,
-    refetchIntervalInBackground: false
+    refetchIntervalInBackground: false,
+    // not to fire the get request on mount
+    enabled: false
   })
 
   console.log({ isLoading, isFetching })
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <h2>Loading...</h2>
   }
 
@@ -54,6 +60,8 @@ export const RQSuperHeroesPage = () => {
   return (
     <>
       <h2>React Query Super Heroes Page</h2>
+      {/* click to manually trigger the query */}
+      <button onClick={refetch}>Fetch heros</button>
       {data?.data.map(hero => {
         return <div key={hero.name}>{hero.name}</div>
       })}
