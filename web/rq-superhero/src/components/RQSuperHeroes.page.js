@@ -29,17 +29,19 @@ const fetchSuperHeroes = () => {
 
 // refetch: function to manually trigger the query
 
-// perform side effect when query completes
+// onSuccess, onError: perform side effect when query completes
+
+// select: data transformation before rendering
 
 /** The RQ way of doing things */
 export const RQSuperHeroesPage = () => {
   const onSuccess = (data) => {
-    alert("some success side effect")
+    // alert("some success side effect")
     console.log('we get the ', data)
   }
 
   const onError = (error) => {
-    alert("some error side effect")
+    // alert("some error side effect")
     console.error('we get the ', error.message)
   }
 
@@ -55,12 +57,14 @@ export const RQSuperHeroesPage = () => {
     // fetch every 2s
     refetchInterval: 2000,
     refetchIntervalInBackground: false,
-    // not to fire the get request on mount
-    enabled: false,
+    // false to not fire the get request on mount
+    enabled: true,
     // callbacks and side effects for success and error 
     onSuccess,
     // will perform query 3 times before it calls onError
-    onError
+    onError,
+    // data transformation will take data as arg
+    select: (data) => data.data.map(hero => hero.name)
   })
 
   console.log({ isLoading, isFetching })
@@ -78,9 +82,12 @@ export const RQSuperHeroesPage = () => {
       <h2>React Query Super Heroes Page</h2>
       {/* click to manually trigger the query */}
       <button onClick={refetch}>Fetch heros</button>
-      {data?.data.map(hero => {
+      {/* {data?.data.map(hero => {
         return <div key={hero.name}>{hero.name}</div>
-      })}
+      })} */}
+
+      {/* after data transformation with select, we can just map */}
+      {data.map(name => <div key={name}>{name}</div>)}
     </>
   )
 }
