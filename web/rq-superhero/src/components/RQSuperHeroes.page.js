@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { Api } from '../constants'
 import { useSuperHeroesData } from '../hooks/useSuperHeroesData'
 
@@ -18,7 +19,7 @@ export const RQSuperHeroesPage = () => {
     console.error('we get the ', error.message)
   }
 
-  const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError, false)
+  const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError)
 
   console.log({ isLoading, isFetching })
 
@@ -35,12 +36,12 @@ export const RQSuperHeroesPage = () => {
       <h2>React Query Super Heroes Page</h2>
       {/* click to manually trigger the query */}
       <button onClick={refetch}>Fetch heros</button>
-      {/* {data?.data.map(hero => {
-        return <div key={hero.name}>{hero.name}</div>
-      })} */}
+      {data?.data.map(hero => {
+        return <div key={hero.name}><Link to={`${hero.id}`}>{hero.name}</Link></div>
+      })}
 
       {/* after data transformation with select, we can just map */}
-      {data && data.map(name => <div key={name}>{name}</div>)}
+      {/* {data && data.map(name => <div key={name}>{name}</div>)} */}
     </>
   )
 }

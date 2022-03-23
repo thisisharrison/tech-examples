@@ -28,7 +28,7 @@ import { fetchSuperHeroes } from '../components/RQSuperHeroes.page'
 
 // select: data transformation before rendering
 
-export const useSuperHeroesData = (onSuccess, onError, enabled) => {
+export const _useSuperHeroesData = (onSuccess, onError, enabled) => {
     return useQuery('superheroes', fetchSuperHeroes, {
         // will be garbage collected after 5s
         cacheTime: 5000,
@@ -49,5 +49,12 @@ export const useSuperHeroesData = (onSuccess, onError, enabled) => {
         onError,
         // data transformation will take data as arg
         select: (data) => data.data.map(hero => hero.name)
+    })
+}
+
+export const useSuperHeroesData = (onSuccess, onError) => {
+    return useQuery('superheroes', fetchSuperHeroes, {
+        onSuccess,
+        onError,
     })
 }
