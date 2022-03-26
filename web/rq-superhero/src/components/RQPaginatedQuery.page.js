@@ -10,8 +10,9 @@ const fetchColors = (pageNumber) => axios.get(Api.colors + `?_limit=2&_page=${pa
 
 export const RQPaginatedQueryPage = () => {
     const [pageNumber, setPageNumber] = useState(1)
-    const { isLoading, isError, error, data, isFetching } = useQuery(['colors', pageNumber], () => fetchColors(pageNumber), {
+    const { isLoading, isError, error, data, isFetching, isPreviousData } = useQuery(['colors', pageNumber], () => fetchColors(pageNumber), {
         // Set this to`true` to keep the previous `data` when fetching based on a new query key
+        // When the new data arrives, the previous data is seamlessly swapped to show the new data.
         keepPreviousData: true
     })
 
@@ -32,6 +33,8 @@ export const RQPaginatedQueryPage = () => {
     // Since the last page's data potentially sticks around between page requests,
     // we can use `isFetching` to show a background loading
     // indicator since our `isLoading` state won't be triggered
+
+    // isPreviousData is made available to know what data the query is currently providing you
     return (
         <div>
             <h2>RQPaginatedQuery.page</h2>
@@ -40,11 +43,14 @@ export const RQPaginatedQueryPage = () => {
                     <h2 style={{ color: color.label }}>{color.id}. {color.label}</h2>
                 </div>
             ))}
+
+            <pre>{JSON.stringify({ isPreviousData })}</pre>
+
             <p>{isFetching && 'Loading'}</p>
 
-            <button onClick={() => setPageNumber(prev => prev !== 1 ? prev - 1 : prev)} disabled={pageNumber === 1}>Prev</button>
+            <button onClick={() => setPageNumber(prev => prev !== 1 ? prev - 1 : prev)} disabled={isPreviousData || pageNumber === 1}>Prev</button>
             <span>Page {pageNumber}</span>
-            <button onClick={() => setPageNumber(prev => prev !== 4 ? prev + 1 : prev)} disabled={pageNumber === 4}>Next</button>
+            <button onClick={() => setPageNumber(prev => prev !== 4 ? prev + 1 : prev)} disabled={isPreviousData || pageNumber === 4}>Next</button>
         </div>
     )
 }
