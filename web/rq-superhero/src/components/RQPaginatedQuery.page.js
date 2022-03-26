@@ -15,8 +15,11 @@ export const RQPaginatedQueryPage = () => {
         keepPreviousData: true
     })
 
+    console.log({ isLoading, isFetching, pageNumber })
+
     // without keepPreviousData, we show Loading layout and previous page's data is gone
     // we can see Loading in <p> with isFetching
+    // isLoading is only true on initial query when keepPreviousData is set to true
     if (isLoading) {
         return <h2>Loading...</h2>
     }
@@ -24,6 +27,7 @@ export const RQPaginatedQueryPage = () => {
     if (isError) {
         return <h2>{error.message}</h2>
     }
+
 
     return (
         <div>
