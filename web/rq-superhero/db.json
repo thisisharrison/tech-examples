@@ -29,5 +29,17 @@
             "id": 3,
             "name": "Rachel Green"
         }
+    ],
+    "users": [
+        {
+            "id": "demo@example.com",
+            "channelId": "youtube"
+        }
+    ],
+    "channels": [
+        {
+            "id": "youtube",
+            "courses": ["react", "vue", "angular"]
+        }
     ]
 }
