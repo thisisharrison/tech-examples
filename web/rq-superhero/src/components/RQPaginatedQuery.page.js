@@ -29,6 +29,9 @@ export const RQPaginatedQueryPage = () => {
     }
 
 
+    // Since the last page's data potentially sticks around between page requests,
+    // we can use `isFetching` to show a background loading
+    // indicator since our `isLoading` state won't be triggered
     return (
         <div>
             <h2>RQPaginatedQuery.page</h2>
@@ -37,7 +40,6 @@ export const RQPaginatedQueryPage = () => {
                     <h2 style={{ color: color.label }}>{color.id}. {color.label}</h2>
                 </div>
             ))}
-
             <p>{isFetching && 'Loading'}</p>
 
             <button onClick={() => setPageNumber(prev => prev !== 1 ? prev - 1 : prev)} disabled={pageNumber === 1}>Prev</button>
