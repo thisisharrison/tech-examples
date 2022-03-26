@@ -41,5 +41,15 @@
             "id": "youtube",
             "courses": ["react", "vue", "angular"]
         }
+    ],
+    "colors": [
+        {"id": 1, "label": "blue"},
+        {"id": 2, "label": "red"},
+        {"id": 3, "label": "green"},
+        {"id": 4, "label": "yellow"},
+        {"id": 5, "label": "pink"},
+        {"id": 6, "label": "orange"},
+        {"id": 7, "label": "purple"},
+        {"id": 8, "label": "gold"}
     ]
 }
