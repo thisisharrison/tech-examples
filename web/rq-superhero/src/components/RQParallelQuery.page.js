@@ -17,8 +17,8 @@ export const RQParallelQueryPage = () => {
     return (
         <div>
             <h2>RQParallelQuery.page</h2>
-            <pre>{JSON.stringify(heroes.data)}</pre>
-            <pre>{JSON.stringify(friends.data)}</pre>
+            <pre>{JSON.stringify(heroes?.data)}</pre>
+            <pre>{JSON.stringify(friends?.data)}</pre>
         </div>
     )
 }
