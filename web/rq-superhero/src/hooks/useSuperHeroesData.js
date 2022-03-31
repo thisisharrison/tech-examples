@@ -66,6 +66,18 @@ export const useSuperHeroesData = (onSuccess, onError) => {
 export const useAddSuperHeroData = () => {
     const queryClient = useQueryClient()
     return useMutation(addSuperHero, {
-        onSuccess: () => queryClient.invalidateQueries('superheroes')
+        // data is the response of post
+        onSuccess: (data) => {
+            // instead of posting (201) then getting (200) new heroes, we can use the response from post
+            // return queryClient.invalidateQueries('superheroes')
+
+            // setQueryData to update the cached data
+            queryClient.setQueryData('superheroes', (oldData) => {
+                return {
+                    ...oldData,
+                    data: [...oldData.data, data.data]
+                }
+            })
+        }
     })
 }

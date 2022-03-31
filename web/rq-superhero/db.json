@@ -34,6 +34,36 @@
       "name": "Sang Chi",
       "alterEgo": "Sang Chi",
       "id": 7
+    },
+    {
+      "name": "Green Arrow",
+      "alterEgo": "Oliver Queen",
+      "id": 8
+    },
+    {
+      "name": "The Hulk",
+      "alterEgo": "Dr Baner",
+      "id": 9
+    },
+    {
+      "name": "Captain America",
+      "alterEgo": "Steve Rogers",
+      "id": 10
+    },
+    {
+      "name": "Captain Marvel",
+      "alterEgo": "Jane Danvers",
+      "id": 11
+    },
+    {
+      "name": "Black Panther",
+      "alterEgo": "King T'Challa",
+      "id": 12
+    },
+    {
+      "name": "abc",
+      "alterEgo": "123",
+      "id": 13
     }
   ],
   "friends": [

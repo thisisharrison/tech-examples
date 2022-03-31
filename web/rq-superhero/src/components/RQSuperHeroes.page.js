@@ -68,7 +68,7 @@ export const RQSuperHeroesPage = () => {
 
       {/* click to manually trigger the query */}
       <button onClick={refetch}>Fetch heros</button>
-      {data?.data.map(hero => {
+      {data?.data.sort((a, b) => b.id - a.id).map(hero => {
         return <div key={hero.name}><Link to={`${hero.id}`}>{hero.name}</Link></div>
       })}
 
