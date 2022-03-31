@@ -1,5 +1,5 @@
-import { useQuery } from 'react-query'
-import { fetchSuperHeroes } from '../components/RQSuperHeroes.page'
+import { useMutation, useQuery } from 'react-query'
+import { fetchSuperHeroes, addSuperHero } from '../components/RQSuperHeroes.page'
 
 // useQuery
 // 1st arg: unique key to identify query
@@ -57,4 +57,9 @@ export const useSuperHeroesData = (onSuccess, onError) => {
         onSuccess,
         onError,
     })
+}
+
+// Adds superhero to db.json
+export const useAddSuperHeroData = () => {
+    return useMutation(addSuperHero)
 }
