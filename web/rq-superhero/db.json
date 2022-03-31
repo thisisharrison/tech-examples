@@ -24,6 +24,16 @@
       "name": "Ironman",
       "alterEgo": "Tony Stark",
       "id": 5
+    },
+    {
+      "name": "Spiderman",
+      "alterEgo": "Peter Parker",
+      "id": 6
+    },
+    {
+      "name": "Sang Chi",
+      "alterEgo": "Sang Chi",
+      "id": 7
     }
   ],
   "friends": [

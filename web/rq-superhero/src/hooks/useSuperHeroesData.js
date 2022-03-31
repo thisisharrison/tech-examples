@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { fetchSuperHeroes, addSuperHero } from '../components/RQSuperHeroes.page'
 
 // useQuery
@@ -60,6 +60,12 @@ export const useSuperHeroesData = (onSuccess, onError) => {
 }
 
 // Adds superhero to db.json
+// Invalidate the query key "superheroes" will invalidate and refetch single or multiple queries in the cache 
+// based on their query keys or any other functionally accessible property/state of the query. 
+// Add it to onSuccess such that after the post request is successful, we get fresh superheroes data
 export const useAddSuperHeroData = () => {
-    return useMutation(addSuperHero)
+    const queryClient = useQueryClient()
+    return useMutation(addSuperHero, {
+        onSuccess: () => queryClient.invalidateQueries('superheroes')
+    })
 }
