@@ -69,7 +69,7 @@ export const useAddSuperHeroData = () => {
         // data is the response of post
         onSuccess: (data) => {
             // instead of posting (201) then getting (200) new heroes, we can use the response from post
-            // return queryClient.invalidateQueries('superheroes')
+            // queryClient.invalidateQueries('superheroes')
 
             // setQueryData to update the cached data
             queryClient.setQueryData('superheroes', (oldData) => {
