@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Api } from '../constants'
-import { useAddSuperHeroData, useSuperHeroesData } from '../hooks/useSuperHeroesData'
+import { useAddSuperHeroData, useOptimisticAddSuperHero, useSuperHeroesData } from '../hooks/useSuperHeroesData'
 
 export const fetchSuperHeroes = () => {
   return axios.get(Api.good)
@@ -29,7 +29,7 @@ export const RQSuperHeroesPage = () => {
 
   const { isLoading, data, isError, error, isFetching, refetch } = useSuperHeroesData(onSuccess, onError)
   // function to post data
-  const { mutate, isLoading: isAdding, isError: addIsError, error: addError } = useAddSuperHeroData()
+  const { mutate, isLoading: isAdding, isError: addIsError, error: addError } = useOptimisticAddSuperHero() //useAddSuperHeroData()
 
   // console.log({ isLoading, isFetching })
 

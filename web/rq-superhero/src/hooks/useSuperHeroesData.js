@@ -81,3 +81,36 @@ export const useAddSuperHeroData = () => {
         }
     })
 }
+
+export const useOptimisticAddSuperHero = () => {
+    const queryClient = useQueryClient()
+    return useMutation(addSuperHero, {
+        // what to do when we call mutate
+        onMutate: async (newHero) => {
+            // cancel out-going refetch, this is async
+            await queryClient.cancelQueries('superheroes')
+            // get current data
+            const oldData = queryClient.getQueryData('superheroes')
+            // set current data to include it 
+            queryClient.setQueryData('superheroes', (previous) => {
+                return {
+                    ...previous,
+                    data: [
+                        ...previous.data,
+                        { id: previous?.data?.length + 1, ...newHero }
+                    ]
+                }
+            })
+            // return old data to rollback on if mutation failed
+            return { oldData }
+        },
+        // context can access oldData returned above
+        onError: (error, newHero, context) => {
+            queryClient.setQueryData('superheroes', context.oldData)
+        },
+        onSettled: () => {
+            // keeps client and server in sync
+            queryClient.invalidateQueries('superheroes')
+        }
+    })
+}

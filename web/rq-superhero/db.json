@@ -64,6 +64,16 @@
       "name": "abc",
       "alterEgo": "123",
       "id": 13
+    },
+    {
+      "name": "Iron Fist",
+      "alterEgo": "Danny Rand",
+      "id": 14
+    },
+    {
+      "name": "Daredevil",
+      "alterEgo": "Matt Murdock",
+      "id": 15
     }
   ],
   "friends": [
