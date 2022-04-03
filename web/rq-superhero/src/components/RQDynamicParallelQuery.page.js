@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { useQueries, useQuery } from 'react-query'
-import axios from 'axios'
-import { Api } from '../constants'
-
-const fetchSuperHero = (id) => axios.get(Api.good + `/${id}`)
+import { useQueries } from 'react-query'
+import { fetchSuperHero } from '../api'
 
 // number of queries to execute is dynamic from render to render 
 // cannot use manual querying as it violates the rules of hook

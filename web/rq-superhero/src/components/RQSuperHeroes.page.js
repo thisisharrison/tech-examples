@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Api } from '../constants'
-import { useAddSuperHeroData, useOptimisticAddSuperHero, useSuperHeroesData } from '../hooks/useSuperHeroesData'
+import { useOptimisticAddSuperHero, useSuperHeroesData } from '../hooks/useSuperHeroesData'
 
 export const fetchSuperHeroes = () => {
   return axios.get(Api.good)

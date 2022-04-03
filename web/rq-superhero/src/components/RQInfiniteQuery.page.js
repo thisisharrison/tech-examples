@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import { useInfiniteQuery } from 'react-query'
 import axios from 'axios'
 import { Api } from '../constants'
