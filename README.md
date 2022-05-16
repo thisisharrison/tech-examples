@@ -4,7 +4,7 @@ Try out different tech stacks and try building my own
 
 ## Web
 
-- react-query
+- [react-query](https://react-query.tanstack.com/)
   - [Star wars API](web/rq-starwars/src/index.js)
   - [Super Hero](web/rq-superhero/src/index.js)
 
@@ -12,11 +12,13 @@ Try out different tech stacks and try building my own
 
 #### Front-End
 
-- [ ] [next js](https://nextjs.org/)
+- [ ] [rtk-query](https://redux-toolkit.js.org/rtk-query/overview)
 - [ ] [redux-saga](https://redux-saga.js.org/)
+- [ ] [redux-observable](https://redux-observable.js.org/)
 - [ ] [react v18](https://github.com/reactwg/react-18/discussions/9)
 - [ ] [react-rxjs](https://react-rxjs.org/)
 - [ ] [vue](https://vuejs.org/)
+- [ ] [next js](https://nextjs.org/)
 - [ ] [angular](https://angular.io/)
 - [ ] dva
 - [ ] core-fe
